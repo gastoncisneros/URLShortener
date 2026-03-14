@@ -1,0 +1,156 @@
+# ============================================================
+# .gitignore — DistributedShortener
+# Rider on macOS + .NET 9
+# ============================================================
+
+# -----------------------------------------------
+# JetBrains Rider
+# -----------------------------------------------
+.idea/
+*.sln.iml
+.idea/.idea.*/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# -----------------------------------------------
+# macOS
+# -----------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# -----------------------------------------------
+# .NET / C#
+# -----------------------------------------------
+
+# Build output
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+out/
+build/
+artifacts/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+!packages/repositories.config
+*.ncrunch*
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet v3+
+*.nuget.g.props
+*.nuget.g.targets
+
+# Publish output
+publish/
+PublishProfiles/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio cache / options
+.vs/
+Generated\ Files/
+
+# MSBuild
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+*.appx
+*.appxbundle
+*.appxupload
+
+# StyleCop
+StyleCopReport.xml
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+TestResult.xml
+*.trx
+coverage.json
+coverage.opencover.xml
+coverage.cobertura.xml
+*.coveragexml
+lcov.info
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json
+
+# -----------------------------------------------
+# Docker
+# -----------------------------------------------
+.dockerignore
+
+# -----------------------------------------------
+# Environment / Secrets
+# -----------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pfx
+*.p12
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# -----------------------------------------------
+# AWS
+# -----------------------------------------------
+.aws/credentials
+aws-exports.js
+
+# -----------------------------------------------
+# Terraform (for later infra work)
+# -----------------------------------------------
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+
+# -----------------------------------------------
+# Logs
+# -----------------------------------------------
+*.log
+logs/
+
+# -----------------------------------------------
+# Claude Code
+# -----------------------------------------------
+.claude/
