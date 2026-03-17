@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedShortener", "DistributedShortener\DistributedShortener.csproj", "{2BF33B41-E03A-423F-80C0-DC9C997C1CFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedShortener.Api", "DistributedShortener.Api\DistributedShortener.Api.csproj", "{2BF33B41-E03A-423F-80C0-DC9C997C1CFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
