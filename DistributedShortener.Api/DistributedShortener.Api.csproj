@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Carter" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
     </ItemGroup>
 
     <ItemGroup>
