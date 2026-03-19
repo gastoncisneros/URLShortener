@@ -47,7 +47,7 @@ public class SqsController : ControllerBase
             WaitTimeSeconds = 5
         });
 
-        return Ok(response.Messages.Select(m => new { m.MessageId, m.Body }));
+        return Ok(response);
     }
 
     private async Task<string> GetQueueUrl()

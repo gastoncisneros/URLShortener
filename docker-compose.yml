@@ -20,7 +20,7 @@ services:
       - AWS_ACCESS_KEY_ID=test                  # Credenciales dummy - LocalStack acepta cualquier valor
       - AWS_SECRET_ACCESS_KEY=test              # No son credenciales reales, solo se necesitan porque el SDK las requiere
     volumes:
-      - "./.localstack:/tmp/localstack"                           # Estado interno de LocalStack (datos de los servicios)
+      - "./.localstack:/var/lib/localstack"                       # Estado interno de LocalStack (datos de los servicios)
       - "/var/run/docker.sock:/var/run/docker.sock"               # Acceso al Docker daemon - necesario para servicios
       # que crean contenedores (ej: Lambda)
 

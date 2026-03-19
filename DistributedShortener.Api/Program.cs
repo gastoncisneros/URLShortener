@@ -18,7 +18,7 @@ using (var scope = app.Services.CreateScope())
     var sqsClient = scope.ServiceProvider.GetRequiredService<IAmazonSQS>();
     var queuesResponse = await sqsClient.ListQueuesAsync(new ListQueuesRequest());
 
-    var existingQueue = queuesResponse.QueueUrls.FirstOrDefault(url => url.EndsWith(sqsSettings.QueueName));
+    var existingQueue = queuesResponse.QueueUrls?.FirstOrDefault(url => url.EndsWith(sqsSettings.QueueName));
 
     if (existingQueue == null)
     {
