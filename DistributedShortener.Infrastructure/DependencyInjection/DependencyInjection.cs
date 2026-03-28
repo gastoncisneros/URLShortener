@@ -9,6 +9,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        // Sqs puede estar configurado con LocalStack (Docker) y en PROD leemos de settings
+        // que tendran la URL real de SQS en Amazon.
         services.Configure<SqsSettings>(configuration.GetSection(SqsSettings.SectionName));
 
         services.AddSingleton<IAmazonSQS>(sp =>

@@ -11,7 +11,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 // Create queue on app start
-var sqsSettings = builder.Configuration.GetSection(SqsSettings.SectionName).Get<SqsSettings>()!;
+SqsSettings sqsSettings = builder.Configuration.GetSection(SqsSettings.SectionName).Get<SqsSettings>()!;
 
 using (var scope = app.Services.CreateScope())
 {

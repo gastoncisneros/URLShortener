@@ -5,8 +5,8 @@ services:
   # Docs: https://docs.localstack.cloud/references/configuration/
   # ============================================================
   localstack:
-    container_name: urlshortener-localstack  # Nombre configurable via env var, default: localstack-main
-    image: localstack/localstack                                   # Community Edition (gratuita)
+    container_name: urlshortener-localstack     # Nombre configurable via env var, default: localstack-main
+    image: localstack/localstack                # Community Edition (gratuita)
     ports:
       - "4566:4566"                             # Gateway principal - TODOS los servicios AWS se acceden por este puerto
       # Ejemplo: SQS endpoint -> http://localhost:4566
@@ -14,15 +14,15 @@ services:
     environment:
       - DEBUG=${DEBUG:-0}                       # 0 = logs normales, 1 = logs verbose para debugging
       - SERVICES=sqs                            # Solo habilita SQS. Los demas servicios AWS quedan deshabilitados.
-        # Si necesitas mas servicios: SERVICES=sqs,s3,sns
-      # Si lo removés, se habilitan TODOS los servicios.
+                                                # Si necesitas mas servicios: SERVICES=sqs,s3,sns
+                                                # Si lo removés, se habilitan TODOS los servicios.
       - DEFAULT_REGION=us-east-1                # Region AWS por defecto para los servicios emulados
       - AWS_ACCESS_KEY_ID=test                  # Credenciales dummy - LocalStack acepta cualquier valor
       - AWS_SECRET_ACCESS_KEY=test              # No son credenciales reales, solo se necesitan porque el SDK las requiere
     volumes:
       - "./.localstack:/var/lib/localstack"                       # Estado interno de LocalStack (datos de los servicios)
       - "/var/run/docker.sock:/var/run/docker.sock"               # Acceso al Docker daemon - necesario para servicios
-      # que crean contenedores (ej: Lambda)
+                                                                  # que crean contenedores (ej: Lambda)
 
   # ============================================================
   # PostgreSQL - Base de datos relacional principal
