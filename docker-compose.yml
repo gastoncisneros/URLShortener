@@ -1,25 +1,59 @@
 services:
 
+  # ============================================================
+  # LocalStack - Emulador de servicios AWS para desarrollo local
+  # Docs: https://docs.localstack.cloud/references/configuration/
+  # ============================================================
+  localstack:
+    container_name: urlshortener-localstack     # Nombre configurable via env var, default: localstack-main
+    image: localstack/localstack                # Community Edition (gratuita)
+    ports:
+      - "4566:4566"                             # Gateway principal - TODOS los servicios AWS se acceden por este puerto
+      # Ejemplo: SQS endpoint -> http://localhost:4566
+      - "4510-4559:4510-4559"                   # Rango de puertos para servicios externos (Lambda containers, etc.)
+    environment:
+      - DEBUG=${DEBUG:-0}                       # 0 = logs normales, 1 = logs verbose para debugging
+      - SERVICES=sqs                            # Solo habilita SQS. Los demas servicios AWS quedan deshabilitados.
+                                                # Si necesitas mas servicios: SERVICES=sqs,s3,sns
+                                                # Si lo removés, se habilitan TODOS los servicios.
+      - DEFAULT_REGION=us-east-1                # Region AWS por defecto para los servicios emulados
+      - AWS_ACCESS_KEY_ID=test                  # Credenciales dummy - LocalStack acepta cualquier valor
+      - AWS_SECRET_ACCESS_KEY=test              # No son credenciales reales, solo se necesitan porque el SDK las requiere
+    volumes:
+      - "./.localstack:/var/lib/localstack"                       # Estado interno de LocalStack (datos de los servicios)
+      - "/var/run/docker.sock:/var/run/docker.sock"               # Acceso al Docker daemon - necesario para servicios
+                                                                  # que crean contenedores (ej: Lambda)
+
+  # ============================================================
+  # PostgreSQL - Base de datos relacional principal
+  # ============================================================
   postgres:
-    image: postgres:16
+    image: postgres:16                          # Imagen oficial de PostgreSQL version 16
     container_name: urlshortener-postgres
     environment:
-      POSTGRES_USER: urlshortener
-      POSTGRES_PASSWORD: urlshortener
-      POSTGRES_DB: urlshortener
+      POSTGRES_USER: urlshortener               # Usuario que se crea al iniciar el contenedor
+      POSTGRES_PASSWORD: urlshortener           # Password del usuario (solo para desarrollo local)
+      POSTGRES_DB: urlshortener                 # Base de datos que se crea automaticamente al iniciar
     ports:
-      - "5432:5432"
+      - "5432:5432"                             # Puerto host:contenedor - permite conectarse desde localhost:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data  # Volumen persistente - los datos sobreviven a docker-compose down
 
+  # ============================================================
+  # Redis - Cache en memoria
+  # ============================================================
   redis:
-    image: redis:7
+    image: redis:7                              # Imagen oficial de Redis version 7
     container_name: urlshortener-redis
     ports:
-      - "6379:6379"
+      - "6379:6379"                             # Puerto estandar de Redis
     volumes:
-      - redis_data:/data
+      - redis_data:/data                        # Volumen persistente para snapshots de Redis (RDB)
 
+# ============================================================
+# Volumenes con nombre - Docker los gestiona automaticamente
+# Se persisten entre reinicios. Para borrarlos: docker-compose down -v
+# ============================================================
 volumes:
   postgres_data:
   redis_data:
