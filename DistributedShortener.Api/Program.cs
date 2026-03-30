@@ -19,24 +19,24 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-// Create queue on app start
-SqsSettings sqsSettings = builder.Configuration.GetSection(SqsSettings.SectionName).Get<SqsSettings>()!;
-
-using (var scope = app.Services.CreateScope())
-{
-    var sqsClient = scope.ServiceProvider.GetRequiredService<IAmazonSQS>();
-    var queuesResponse = await sqsClient.ListQueuesAsync(new ListQueuesRequest());
-
-    var existingQueue = queuesResponse.QueueUrls?.FirstOrDefault(url => url.EndsWith(sqsSettings.QueueName));
-
-    if (existingQueue == null)
-    {
-        await sqsClient.CreateQueueAsync(new CreateQueueRequest
-        {
-            QueueName = sqsSettings.QueueName,
-        });
-    }
-}
+// // Create queue on app start
+// SqsSettings sqsSettings = builder.Configuration.GetSection(SqsSettings.SectionName).Get<SqsSettings>()!;
+//
+// using (var scope = app.Services.CreateScope())
+// {
+//     var sqsClient = scope.ServiceProvider.GetRequiredService<IAmazonSQS>();
+//     var queuesResponse = await sqsClient.ListQueuesAsync(new ListQueuesRequest());
+//
+//     var existingQueue = queuesResponse.QueueUrls?.FirstOrDefault(url => url.EndsWith(sqsSettings.QueueName));
+//
+//     if (existingQueue == null)
+//     {
+//         await sqsClient.CreateQueueAsync(new CreateQueueRequest
+//         {
+//             QueueName = sqsSettings.QueueName,
+//         });
+//     }
+// }
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
