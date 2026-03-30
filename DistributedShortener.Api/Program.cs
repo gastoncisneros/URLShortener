@@ -3,7 +3,7 @@ using Amazon.SQS.Model;
 using Carter;
 using DistributedShortener.Api.Exceptions;
 using DistributedShortener.Application.DepencencyInjection;
-using DistributedShortener.Infrastructure.Configuration;
+using DistributedShortener.Infrastructure.Configurations;
 using DistributedShortener.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);

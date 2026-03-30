@@ -1,4 +1,4 @@
-namespace DistributedShortener.Infrastructure.Configuration;
+namespace DistributedShortener.Infrastructure.Configurations;
 
 public class SqsSettings
 {

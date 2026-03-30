@@ -1,5 +1,5 @@
 using Amazon.SQS;
-using DistributedShortener.Infrastructure.Configuration;
+using DistributedShortener.Infrastructure.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

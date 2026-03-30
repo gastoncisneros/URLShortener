@@ -7,6 +7,7 @@ public sealed class ShortLink
 {
     private readonly List<IDomainEvent> _domainEvents = new();
     
+    public Guid Id { get; private set; }
     public ShortCode Code { get; private set; }
     public OriginalUrl OriginalUrl { get; private set; }
     public string CreatedBy { get; private set; }
@@ -22,6 +23,7 @@ public sealed class ShortLink
     {
         var link = new ShortLink
         {
+            Id = Guid.NewGuid(),
             Code = ShortCode.Generate(),
             OriginalUrl = OriginalUrl.From(originalUrl),
             CreatedBy =  createdBy,

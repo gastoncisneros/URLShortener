@@ -1,6 +1,6 @@
 using Amazon.SQS;
 using Amazon.SQS.Model;
-using DistributedShortener.Infrastructure.Configuration;
+using DistributedShortener.Infrastructure.Configurations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 

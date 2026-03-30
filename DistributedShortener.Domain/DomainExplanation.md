@@ -21,7 +21,7 @@ FluentValidation acts in the Application layer validating commands
 and queries.
 
 ***Aggregate***
-Group of domain objects acting as a unit.
+Group of domain objects acting as a unit. Comes from DDD
 The root (AggregateRoot) is the entry point. In this case, the entry point is
 ShortLink.cs
 
