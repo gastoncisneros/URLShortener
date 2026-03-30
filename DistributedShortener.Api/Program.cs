@@ -13,6 +13,7 @@ builder.Services.AddInfrastructure(builder.Configuration); // EF Core + Redis + 
 builder.Services.AddApplication(builder.Configuration); //MediatR + FluentValidation + Behaviors
 builder.Services.AddCarter();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
