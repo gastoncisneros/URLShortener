@@ -1,17 +1,23 @@
 using DistributedShortener.Application.Abstractions;
 using DistributedShortener.Domain.Aggregates;
+using DistributedShortener.Domain.ValueObjects;
+using DistributedShortener.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DistributedShortener.Infrastructure.Repositories;
 
-public class LinkRepository : ILinkRepository
+public sealed class LinkRepository(ApplicationDbContext dbContext) : ILinkRepository
 {
-    public Task SaveAsync(ShortLink link, CancellationToken ct = default)
+    public async Task SaveAsync(ShortLink link, CancellationToken ct = default)
     {
-        throw new NotImplementedException();
+        await dbContext.ShortLinks.AddAsync(link, ct);
+        await dbContext.SaveChangesAsync(ct);
     }
 
-    public Task<ShortLink?> GetByCodeAsync(string code, CancellationToken ct = default)
+    public async Task<ShortLink?> GetByCodeAsync(string code, CancellationToken ct = default)
     {
-        throw new NotImplementedException();
+        return await  dbContext.ShortLinks
+            .AsNoTracking() // IMPORTANT: Reading does not need tracking changes on this object.
+            .FirstOrDefaultAsync(x => x.Code == ShortCode.From(code), ct);
     }
 }
