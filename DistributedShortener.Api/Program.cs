@@ -1,5 +1,7 @@
 using Amazon.SQS;
 using Amazon.SQS.Model;
+using Carter;
+using DistributedShortener.Api.Exceptions;
 using DistributedShortener.Application.DepencencyInjection;
 using DistributedShortener.Infrastructure.Configuration;
 using DistributedShortener.Infrastructure.DependencyInjection;
@@ -7,8 +9,12 @@ using DistributedShortener.Infrastructure.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration); // EF Core + Redis + SQS
+builder.Services.AddApplication(builder.Configuration); //MediatR + FluentValidation + Behaviors
+builder.Services.AddCarter();
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -32,6 +38,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 app.MapControllers();
+app.MapCarter();
 app.Run();
